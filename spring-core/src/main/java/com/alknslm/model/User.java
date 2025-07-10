@@ -1,14 +1,12 @@
 package com.alknslm.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor // tüm parametreleri içeren constructure
 @NoArgsConstructor // parametresiz constructure
+@ToString
 public class User {
     private String firstName;
 }
