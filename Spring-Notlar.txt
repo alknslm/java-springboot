@@ -1,0 +1,22 @@
+Kurulması Gerekenler
+----------------------
+*   Spring Tools
+*   Java (jdk 17 kuruldu)
+*   Maven (download apache maven) sonrasında C diskine aldık. Environment Variable'a tanımladık alttaki path'e çift tıkla yeni olarak tanımla. "C:\apache-maven-3.9.9\bin" bu yolu.
+
+dependeciesler
+C:\Users\hvl\.m2\repository yoluna indirilir bağlılıkları ile birlikte iner
+repository mantığı ilk olarak dosya yolunu okur eğer varsa lokalden kullanır. yoksa maven repository'den çeker jar'ı
+
+Uygulama Sunucusu |
+-------------------
+*   Uygulama sunucu yazılan kodları derleyip sıkıntı yoksa uygulamayı çalıştırılabilir hale getirir.
+
+
+Spring Context ve Bean
+*   Beanler için java classları diyebiliriz. Spring Contextlerde bu beanlerin tutulduğu yer.
+*   spring bean detay "https://medium.com/@zjawad333/spring-foundations-part-1-adding-beans-to-context-cebc3f8073c6"
+*   Bean'i context'e ekleyip başka yerlerden de çağırabiliriz
+*   Nesnesi üretilmiş ve attributeları doldurulmuş datalar için erişim imkanı sağlar.
+*   Eğer bu kullanılmazsa her yerde aynı nesneyi tekrar tekrar yaratıp içini doldurmak gerekecekti.
+*   Üretilen nesne her classta aynı değerlerde işlem yapılacaksa kullanılır. Doldurulmuş dataClasslar(bean) spring contexten çekilir
