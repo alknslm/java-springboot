@@ -1,6 +1,7 @@
 package com.alknslm.repository;
 
 import com.alknslm.model.Employee;
+import com.alknslm.model.UpdateEmployeeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -54,5 +55,29 @@ public class EmployeeRepository {
         }
 
         return employeeWithParams;
+    }
+
+    public Employee saveEmployee(Employee newEmployee) {
+        employeeList.add(newEmployee);
+        return newEmployee;
+    }
+
+    public boolean deleteEmployee(int id) {
+        for (Employee employee : employeeList) {
+            if(id == employee.getId()){
+                employeeList.remove(employee);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Employee updateEmployee(int id ,UpdateEmployeeRequest newEmployee) {
+        Employee foundEmployee = getEmployeeById(id);
+        if(foundEmployee != null){
+            foundEmployee.setFirstName(newEmployee.getFirstName());
+            foundEmployee.setLastName(newEmployee.getLastName());
+        }
+        return foundEmployee;
     }
 }
