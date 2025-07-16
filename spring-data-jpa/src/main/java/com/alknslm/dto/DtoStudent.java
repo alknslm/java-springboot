@@ -1,0 +1,15 @@
+package com.alknslm.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class DtoStudent {
+/**Kopyalanacak Entity içerisindeki field nameleri ile birebir aynı olması gerkiyor*/
+
+    private String firstName;
+    private String lastName;
+}
