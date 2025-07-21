@@ -1,7 +1,9 @@
 package com.alknslm.services.impl;
 
+import com.alknslm.dto.DtoCourse;
 import com.alknslm.dto.DtoStudent;
 import com.alknslm.dto.DtoStudentIU;
+import com.alknslm.entities.Course;
 import com.alknslm.entities.Student;
 import com.alknslm.repository.StudentRepository;
 import com.alknslm.services.IStudentService;
@@ -47,15 +49,23 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public DtoStudent getStudentById(Integer id) {
+        DtoStudent dtoStudent = new DtoStudent();
         Optional<Student> optional = studentRepository.findById(id);
-//        Optional<Student> optional = studentRepository.findStudentById(id); // HQL srogusu ile yazılan
-        DtoStudent dto = new DtoStudent();
-        if (optional.isPresent()) {
-            Student dbStudent = optional.get();
-            BeanUtils.copyProperties(dbStudent,dto);
-            return dto;
+        if(optional.isEmpty()){
+            return null;
         }
-        return null;
+        Student dbStudent = optional.get();
+        BeanUtils.copyProperties(dbStudent,dtoStudent);
+
+        if(dbStudent.getCourses() != null && !dbStudent.getCourses().isEmpty()){
+            for(Course course : dbStudent.getCourses()){
+                DtoCourse dtoCourse = new DtoCourse();
+
+                BeanUtils.copyProperties(course,dtoCourse);
+                dtoStudent.getCourses().add(dtoCourse);
+            }
+        }
+        return dtoStudent;
     }
 
     @Override
