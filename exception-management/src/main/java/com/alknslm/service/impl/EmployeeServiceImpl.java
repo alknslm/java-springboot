@@ -4,6 +4,9 @@ import com.alknslm.dto.DtoDepartment;
 import com.alknslm.dto.DtoEmployee;
 import com.alknslm.entities.Department;
 import com.alknslm.entities.Employee;
+import com.alknslm.exception.BaseException;
+import com.alknslm.exception.ErrorMessage;
+import com.alknslm.exception.MessageType;
 import com.alknslm.repository.EmployeeRepository;
 import com.alknslm.service.IEmployeeService;
 import com.fasterxml.jackson.databind.util.BeanUtil;
@@ -26,7 +29,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         Optional<Employee> optional = employeeRepository.findById(id);
 
         if(optional.isEmpty()){
-            return null;
+            throw new BaseException(new ErrorMessage(MessageType.NO_RECORD_EXIST, id.toString()));
         }
 
         Employee dbEmployee = optional.get();
