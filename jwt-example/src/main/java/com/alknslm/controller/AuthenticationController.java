@@ -1,5 +1,6 @@
 package com.alknslm.controller;
 
+import com.alknslm.dtos.AuthenticationResponse;
 import com.alknslm.dtos.LoginResponse;
 import com.alknslm.dtos.LoginUserDto;
 import com.alknslm.dtos.RegisterUserDto;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("rest/api/auth")
 public class AuthenticationController {
 
     private final JwtService jwtService;
@@ -26,18 +26,28 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto){
-        User registeredUser = authenticationService.signup(registerUserDto);
-        return ResponseEntity.ok(registeredUser);
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterUserDto registerUserDto) {
+        return ResponseEntity.ok(authenticationService.signup(registerUserDto));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginUserDto loginUserDto){
-        User authenticatedUser = authenticationService.authenticate(loginUserDto);
-        String jwtToken = jwtService.generateToken(authenticatedUser);
-
-        LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime());
-
-        return ResponseEntity.ok(loginResponse);
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginUserDto loginUserDto) {
+        return ResponseEntity.ok(authenticationService.authenticate(loginUserDto));
     }
+
+//    @PostMapping("/signup")
+//    public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto){
+//        User registeredUser = authenticationService.signup(registerUserDto);
+//        return ResponseEntity.ok(registeredUser);
+//    }
+//
+//    @PostMapping("/login")
+//    public ResponseEntity<LoginResponse> login(@RequestBody LoginUserDto loginUserDto){
+//        User authenticatedUser = authenticationService.authenticate(loginUserDto);
+//        String jwtToken = jwtService.generateToken(authenticatedUser);
+//
+//        LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime());
+//
+//        return ResponseEntity.ok(loginResponse);
+//    }
 }
